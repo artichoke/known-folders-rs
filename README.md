@@ -15,7 +15,7 @@ Folders] API.
 [known folders]:
   https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
 
-The `known-folders` API first appeared in Windows Vista.
+The Known Folders API first appeared in Windows Vista.
 
 ## Usage
 
