@@ -8,8 +8,8 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::c_void;
-use std::ptr;
+use core::ffi::c_void;
+use core::ptr;
 
 use windows_sys::core::PWSTR;
 use windows_sys::Win32::System::Com::CoTaskMemFree;

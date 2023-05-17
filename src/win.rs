@@ -8,10 +8,10 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::mem::size_of;
+use core::mem::size_of;
+use core::slice;
 use std::os::windows::ffi::OsStringExt;
 use std::path::PathBuf;
-use std::slice;
 
 use windows_sys::Win32::{
     Foundation::{E_FAIL, E_INVALIDARG, HANDLE, S_OK},
