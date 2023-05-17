@@ -8,7 +8,7 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-//! Retrievs the full path of a known folder identified by the folder's
+//! Retrieves the full path of a known folder identified by the folder's
 //! **KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the
 //! [Known Folders] API.
 //!

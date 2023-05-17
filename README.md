@@ -8,7 +8,7 @@
 [![API](https://docs.rs/known-folders/badge.svg)](https://docs.rs/known-folders)
 [![API trunk](https://img.shields.io/badge/docs-trunk-blue.svg)](https://artichoke.github.io/known-folders-rs/known-folders/)
 
-Retrievs the full path of a known folder identified by the folder's
+Retrieves the full path of a known folder identified by the folder's
 **KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the
 [Known Folders] API.
 

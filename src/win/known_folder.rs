@@ -59,7 +59,7 @@ use windows_sys::Win32::UI::Shell::{
 /// and a computer will have only folders appropriate to it installed.
 ///
 /// For details on the **KNOWNFOLDERID** constants this enum represents, please
-/// refer to the [upstream documentaion].
+/// refer to the [upstream documentation].
 ///
 /// # Compatibility Notes
 ///
