@@ -8,23 +8,45 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
+//! Retrievs the full path of a known folder identified by the folder's
+//! **KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the
+//! [Known Folders] API.
+//!
+//! # Platform Support
+//!
+//! The Known Folders API first appeared in Windows Vista.
+//!
+//! ## Linkage
+//!
+//! The Known Folders API is provided by Win32, which is linked into every
+//! binary on Windows platforms.
+//!
+//! # Examples
+//!
+#![cfg_attr(windows, doc = "```")]
+#![cfg_attr(not(windows), doc = "```compile_fail")]
+//! use known_folders::{get_known_folder_path, KnownFolder};
+//!
+//! let profile_dir = get_known_folder_path(KnownFolder::Profile);
+//! ```
+//!
+//! [Known Folders]: https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
+
 #[cfg(windows)]
+#[allow(clippy::too_many_lines)]
 mod win;
 
 #[cfg(windows)]
 pub use self::win::*;
 
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
-#[cfg(test)]
+#[cfg(all(test, windows))]
 mod tests {
     use super::*;
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let profile_dir = get_known_folder_path(KnownFolder::Profile).unwrap();
+        assert!(profile_dir.is_dir());
+        assert!(profile_dir.exists());
     }
 }
