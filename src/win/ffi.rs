@@ -43,8 +43,7 @@ impl Guard {
 
 impl Default for Guard {
     fn default() -> Self {
-        let ptr = ptr::null_mut::<PWSTR>();
-        Self(ptr)
+        Self(ptr::null_mut())
     }
 }
 
