@@ -9,10 +9,11 @@
 [![API trunk](https://img.shields.io/badge/docs-trunk-blue.svg)](https://artichoke.github.io/known-folders-rs/known-folders/)
 
 Retrieves the full path of a known folder identified by the folder's
-**KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the
-[Known Folders] API.
+**KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the [Known
+Folders] API.
 
-[Known Folders]: https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
+[known folders]:
+  https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
 
 The `known-folders` API first appeared in Windows Vista.
 
