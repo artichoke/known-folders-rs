@@ -10,6 +10,7 @@
 
 use core::mem::size_of;
 use core::slice;
+use std::ffi::OsString;
 use std::os::windows::ffi::OsStringExt;
 use std::path::PathBuf;
 
