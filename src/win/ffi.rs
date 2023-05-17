@@ -48,7 +48,7 @@ impl Default for Guard {
     }
 }
 
-impl Drop for FreeGuard {
+impl Drop for Guard {
     fn drop(&mut self) {
         let ptr = self.0.cast::<c_void>();
         // SAFETY: `ptr` must always be freed per the API documentation:
