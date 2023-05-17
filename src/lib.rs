@@ -16,6 +16,8 @@
 //!
 //! The Known Folders API first appeared in Windows Vista.
 //!
+//! Note that this crate is completely empty on non-Windows platforms.
+//!
 //! ## Linkage
 //!
 //! The Known Folders API is provided by Win32, which is linked into every
