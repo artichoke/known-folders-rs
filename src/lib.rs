@@ -8,6 +8,12 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
+#[cfg(windows)]
+mod win;
+
+#[cfg(windows)]
+pub use self::win::*;
+
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
