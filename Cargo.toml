@@ -8,8 +8,6 @@ license = "Apache-2.0 OR MIT"
 
 [dependencies]
 
-[target.'cfg(windows)'.dependencies]
-
 [target.'cfg(windows)'.dependencies.windows-sys]
 version = "0.48.0"
 features = [
