@@ -32,6 +32,14 @@
 //!
 //! [Known Folders]: https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
 
+#![no_std]
+#![doc(html_root_url = "https://docs.rs/known-folders/0.1.0")]
+
+// Ensure code blocks in `README.md` compile
+#[cfg(all(doctest, windows))]
+#[doc = include_str!("../README.md")]
+mod readme {}
+
 #[cfg(windows)]
 #[allow(clippy::too_many_lines)]
 mod win;
