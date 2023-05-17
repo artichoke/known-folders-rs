@@ -100,7 +100,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
             // > path of the known folder
             let len = unsafe {
                 let len = lstrlenW(path_ptr);
-                usize::try_from(len).ok()?;
+                usize::try_from(len).ok()?
             };
 
             // SAFETY: `path_ptr` is valid for `len` bytes in a single string
