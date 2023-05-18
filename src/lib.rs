@@ -52,7 +52,6 @@
 //!
 //! [Known Folders]: https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
 
-#![no_std]
 #![doc(html_root_url = "https://docs.rs/known-folders/1.0.0")]
 
 // Ensure code blocks in `README.md` compile

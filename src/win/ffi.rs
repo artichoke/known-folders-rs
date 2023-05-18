@@ -8,8 +8,8 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::ffi::c_void;
-use std::ptr;
+use core::ffi::c_void;
+use core::ptr;
 
 use windows_sys::core::PWSTR;
 use windows_sys::Win32::System::Com::CoTaskMemFree;
@@ -31,11 +31,14 @@ impl Guard {
     /// `PWSTR` itself is a `*mut u16`:
     ///
     /// <https://docs.rs/windows-sys/0.48.0/windows_sys/core/type.PWSTR.html>
+    #[must_use]
+    #[allow(non_snake_case)]
     pub fn as_out_ppszPath(&mut self) -> &mut PWSTR {
         &mut self.0
     }
 
     /// Access the inner wide string.
+    #[must_use]
     pub fn as_pwstr(&self) -> PWSTR {
         self.0
     }
@@ -43,12 +46,11 @@ impl Guard {
 
 impl Default for Guard {
     fn default() -> Self {
-        let ptr = ptr::null_mut::<PWSTR>();
-        Self(ptr)
+        Self(ptr::null_mut())
     }
 }
 
-impl Drop for FreeGuard {
+impl Drop for Guard {
     fn drop(&mut self) {
         let ptr = self.0.cast::<c_void>();
         // SAFETY: `ptr` must always be freed per the API documentation:

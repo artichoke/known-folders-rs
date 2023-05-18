@@ -8,10 +8,11 @@
 // project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::mem::size_of;
+use core::mem::size_of;
+use core::slice;
+use std::ffi::OsString;
 use std::os::windows::ffi::OsStringExt;
 use std::path::PathBuf;
-use std::slice;
 
 use windows_sys::Win32::{
     Foundation::{E_FAIL, E_INVALIDARG, HANDLE, S_OK},
@@ -49,6 +50,9 @@ pub use known_folder::KnownFolder;
 ///
 /// [`KNOWNFOLDERID`]: KnownFolder
 /// [`SHGetKnownFolderPath`]: https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath
+#[must_use]
+#[allow(clippy::match_same_arms)]
+#[allow(clippy::cast_possible_wrap)]
 pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
     // This guard ensures `CoTaskMemFree` is always called after invoking
     // `SHGetKnownFolderPath`, which is required regardless of the return
@@ -100,7 +104,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
             // > path of the known folder
             let len = unsafe {
                 let len = lstrlenW(path_ptr);
-                usize::try_from(len).ok()?;
+                usize::try_from(len).ok()?
             };
 
             // SAFETY: `path_ptr` is valid for `len` bytes in a single string
@@ -118,7 +122,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
             };
 
             let os_str = OsString::from_wide(path);
-            Some(os_str)
+            Some(os_str.into())
         }
         E_FAIL | E_INVALIDARG => {
             // Expected return codes. See:
