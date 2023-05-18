@@ -119,7 +119,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
             };
 
             let os_str = OsString::from_wide(path);
-            Some(os_str)
+            Some(os_str.into())
         }
         E_FAIL | E_INVALIDARG => {
             // Expected return codes. See:
