@@ -34,6 +34,12 @@ use known_folders::{get_known_folder_path, KnownFolder};
 let profile_dir = get_known_folder_path(KnownFolder::Profile);
 ```
 
+You can test this crate works on your platform by running the example:
+
+```shell
+cargo run --example get_profile_dir
+```
+
 ## Implementation
 
 known-folders-rs binds directly to `Win32` using [`windows_sys`].
