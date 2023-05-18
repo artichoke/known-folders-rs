@@ -124,15 +124,11 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
             let os_str = OsString::from_wide(path);
             Some(os_str.into())
         }
-        E_FAIL | E_INVALIDARG => {
-            // Expected return codes. See:
-            //
-            // https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath#return-value
-            None
-        }
-        _ => {
-            // Unexpected return code.
-            None
-        }
+        // Expected return codes. See:
+        //
+        // https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath#return-value
+        E_FAIL | E_INVALIDARG => None,
+        // Unexpected return code.
+        _ => None,
     }
 }
