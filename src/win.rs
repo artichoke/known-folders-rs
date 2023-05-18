@@ -51,6 +51,8 @@ pub use known_folder::KnownFolder;
 /// [`KNOWNFOLDERID`]: KnownFolder
 /// [`SHGetKnownFolderPath`]: https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath
 #[must_use]
+#[allow(clippy::match_same_arms)]
+#[allow(clippy::cast_possible_wrap)]
 pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
     // This guard ensures `CoTaskMemFree` is always called after invoking
     // `SHGetKnownFolderPath`, which is required regardless of the return
