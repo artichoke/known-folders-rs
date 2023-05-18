@@ -31,12 +31,14 @@ impl Guard {
     /// `PWSTR` itself is a `*mut u16`:
     ///
     /// <https://docs.rs/windows-sys/0.48.0/windows_sys/core/type.PWSTR.html>
+    #[must_use]
     #[allow(non_snake_case)]
     pub fn as_out_ppszPath(&mut self) -> &mut PWSTR {
         &mut self.0
     }
 
     /// Access the inner wide string.
+    #[must_use]
     pub fn as_pwstr(&self) -> PWSTR {
         self.0
     }

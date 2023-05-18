@@ -1078,6 +1078,7 @@ pub enum KnownFolder {
 }
 
 impl KnownFolder {
+    #[must_use]
     pub(crate) const fn to_guid(self) -> &'static GUID {
         match self {
             Self::AccountPictures => &FOLDERID_AccountPictures,
