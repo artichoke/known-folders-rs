@@ -31,6 +31,7 @@ impl Guard {
     /// `PWSTR` itself is a `*mut u16`:
     ///
     /// <https://docs.rs/windows-sys/0.48.0/windows_sys/core/type.PWSTR.html>
+    #[allow(non_snake_case)]
     pub fn as_out_ppszPath(&mut self) -> &mut PWSTR {
         &mut self.0
     }
