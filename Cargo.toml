@@ -1,6 +1,6 @@
 [package]
 name = "known-folders"
-version = "1.0.0" # remember to set `html_root_url` in `src/lib.rs`.
+version = "1.0.1" # remember to set `html_root_url` in `src/lib.rs`.
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
 license = "Apache-2.0 OR MIT"
 edition = "2021"
@@ -36,10 +36,10 @@ features = ["markdown_deps_updated", "html_root_url_updated"]
 rustdoc-args = ["--cfg", "docsrs"]
 targets = [
   # Tier 1
-  "i686-pc-windows-gnu",
-  "i686-pc-windows-msvc",
-  "x86_64-pc-windows-gnu",
   "x86_64-pc-windows-msvc",
+  "x86_64-pc-windows-gnu",
+  "i686-pc-windows-msvc",
+  "i686-pc-windows-gnu",
   # Tier 2
   #  "aarch64-pc-windows-msvc",
   #  "i586-pc-windows-msvc",
