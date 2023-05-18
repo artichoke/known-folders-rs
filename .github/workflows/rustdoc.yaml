@@ -22,6 +22,14 @@ jobs:
       RUST_BACKTRACE: 1
 
     steps:
+      # https://github.com/actions/checkout/issues/135
+      - name: Setup git line ending checkout behavior
+        shell: bash
+        if: runner.os == 'Windows'
+        run: |
+          git config --system core.autocrlf false
+          git config --system core.eol lf
+
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
 
