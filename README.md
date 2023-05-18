@@ -6,7 +6,7 @@
 <br>
 [![Crate](https://img.shields.io/crates/v/known-folders.svg)](https://crates.io/crates/known-folders)
 [![API](https://docs.rs/known-folders/badge.svg)](https://docs.rs/known-folders)
-[![API trunk](https://img.shields.io/badge/docs-trunk-blue.svg)](https://artichoke.github.io/known-folders-rs/known-folders/)
+[![API trunk](https://img.shields.io/badge/docs-trunk-blue.svg)](https://artichoke.github.io/known-folders-rs/known_folders/)
 
 Retrieves the full path of a known folder identified by the folder's
 **KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the [Known
