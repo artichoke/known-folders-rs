@@ -34,6 +34,12 @@ use known_folders::{get_known_folder_path, KnownFolder};
 let profile_dir = get_known_folder_path(KnownFolder::Profile);
 ```
 
+You can test this crate works on your platform by running the example:
+
+```shell
+cargo run --example get_profile_dir
+```
+
 ## Implementation
 
 known-folders-rs binds directly to `Win32` using [`windows_sys`].
@@ -44,7 +50,7 @@ Note that this crate is completely empty on non-Windows platforms.
 
 ## Minimum Supported Rust Version
 
-This crate requires at least Rust 1.56.0. This version can be bumped in minor
+This crate requires at least Rust 1.58.0. This version can be bumped in minor
 releases.
 
 ## License
