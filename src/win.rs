@@ -94,7 +94,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
         )
     } {
         S_OK => {
-            let path_ptr = guard.as_pwstr();
+            let path_ptr = guard.as_pcwstr();
 
             // SAFETY: on success, the out pointer is guaranteed to be a valid,
             // NUL-terminated wide string.
@@ -107,9 +107,10 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
                 usize::try_from(len).ok()?
             };
 
-            // SAFETY: `path_ptr` is valid for `len` bytes in a single string
-            // allocation, per windows-sys APIs. `lstrlenW` returns `i32` on
-            // 64-bit platforms. The `match` below guarantees the size of the
+            // SAFETY: `path_ptr` is valid for `len` "characters" in a single
+            // string allocation, per windows-sys APIs. "Characters" are `WCHAR`
+            // values. Additionally, `lstrlenW` returns `i32` on 64-bit
+            // platforms. The `match` below guarantees the size of the
             // allocation is no larger than `isize::MAX`.
             let path = unsafe {
                 match isize::try_from(len) {

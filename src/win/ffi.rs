@@ -11,7 +11,7 @@
 use core::ffi::c_void;
 use core::ptr;
 
-use windows_sys::core::PWSTR;
+use windows_sys::core::{PCWSTR, PWSTR};
 use windows_sys::Win32::System::Com::CoTaskMemFree;
 
 pub struct Guard(PWSTR);
@@ -39,7 +39,7 @@ impl Guard {
 
     /// Access the inner wide string.
     #[must_use]
-    pub fn as_pwstr(&self) -> PWSTR {
+    pub fn as_pcwstr(&self) -> PCWSTR {
         self.0
     }
 }
@@ -58,6 +58,10 @@ impl Drop for Guard {
         // > The calling process is responsible for freeing this resource
         // > once it is no longer needed by calling `CoTaskMemFree`, whether
         // > `SHGetKnownFolderPath` succeeds or not.
+        //
+        // Additionally, `CoTaskMemFree` has no effect if passed `NULL`, so
+        // there is no issue if some future refactor creates a pathway where
+        // `Guard` could be dropped before `SHGetKnownFolderPath` is called.
         unsafe {
             CoTaskMemFree(ptr);
         }
