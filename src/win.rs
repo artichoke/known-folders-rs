@@ -119,6 +119,9 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
                     Ok(_) | Err(_) => return None,
                 };
 
+                // NOTE: this slice must go out of scope before `guard` above is
+                // dropped. This invariant holds since the guard is constructed
+                // outside the scope of this `match` block.
                 slice::from_raw_parts(path_ptr, len)
             };
 
