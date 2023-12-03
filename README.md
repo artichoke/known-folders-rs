@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-known-folders = "1.0.1"
+known-folders = "1.1.0"
 ```
 
 Then resolve well-known directories like this:
@@ -43,6 +43,7 @@ cargo run --example get_profile_dir
 ## Implementation
 
 known-folders-rs binds directly to `Win32` using [`windows_sys`].
+Semver-incompatible `windows_sys` upgrades can be made in minor releases.
 
 [`windows_sys`]: https://crates.io/crates/windows-sys
 
