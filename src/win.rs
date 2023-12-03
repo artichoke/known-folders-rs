@@ -88,7 +88,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
     match unsafe {
         SHGetKnownFolderPath(
             known_folder.to_guid(),
-            KF_FLAG_DEFAULT,
+            KF_FLAG_DEFAULT as _,
             HANDLE::default(),
             guard.as_out_ppszPath(),
         )
