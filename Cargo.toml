@@ -1,10 +1,10 @@
 [package]
 name = "known-folders"
-version = "1.1.0" # remember to set `html_root_url` in `src/lib.rs`.
+version = "1.2.0" # remember to set `html_root_url` in `src/lib.rs`.
 authors = ["Ryan Lopopolo <rjl@hyperbo.la>"]
 license = "Apache-2.0 OR MIT"
 edition = "2021"
-rust-version = "1.58.0"
+rust-version = "1.60.0"
 readme = "README.md"
 repository = "https://github.com/artichoke/known-folders-rs"
 documentation = "https://docs.rs/known-folders"
@@ -17,20 +17,13 @@ include = ["examples/**/*", "src/**/*", "tests/**/*", "LICENSE-*", "README.md"]
 [dependencies]
 
 [target.'cfg(windows)'.dependencies.windows-sys]
-version = "0.52.0"
+version = "0.59.0"
 features = [
   "Win32_Foundation",
   "Win32_Globalization",
   "Win32_System_Com",
   "Win32_UI_Shell",
 ]
-
-# Check that crate versions are properly updated in documentation and code when
-# bumping the version.
-[dev-dependencies.version-sync]
-version = "0.9.4"
-default-features = false
-features = ["markdown_deps_updated", "html_root_url_updated"]
 
 [package.metadata.docs.rs]
 rustdoc-args = ["--cfg", "docsrs"]
