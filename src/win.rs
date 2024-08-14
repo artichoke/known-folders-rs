@@ -9,6 +9,7 @@
 // except according to those terms.
 
 use core::mem::size_of;
+use core::ptr;
 use core::slice;
 use std::ffi::OsString;
 use std::os::windows::ffi::OsStringExt;
@@ -81,7 +82,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
     // - `hToken` is "an access token that represents a particular user. If this
     //   parameter is `NULL`, which is the most common usage, the function
     //   requests the known folder for the current user. We want the known folder
-    //   for the current user, so use `HANDLE::default()`.
+    //   for the current user, so use `ptr::null_mut()`.
     // - `ppszPath` is an out parameter and should be a NULL pointer to a PWSTR.
     //
     // https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath#parameters
@@ -89,7 +90,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
         SHGetKnownFolderPath(
             known_folder.to_guid(),
             KF_FLAG_DEFAULT as _,
-            HANDLE::default(),
+            ptr::null_mut(),
             guard.as_out_ppszPath(),
         )
     } {
