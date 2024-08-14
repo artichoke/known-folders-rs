@@ -16,7 +16,7 @@ use std::os::windows::ffi::OsStringExt;
 use std::path::PathBuf;
 
 use windows_sys::Win32::{
-    Foundation::{E_FAIL, E_INVALIDARG, HANDLE, S_OK},
+    Foundation::{E_FAIL, E_INVALIDARG, S_OK},
     Globalization::lstrlenW,
     UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
 };
