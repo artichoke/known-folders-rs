@@ -118,7 +118,7 @@ pub fn get_known_folder_path(known_folder: KnownFolder) -> Option<PathBuf> {
                     Ok(len) if len < 0 => return None,
                     Ok(len) if len.checked_mul(size_of::<u16>() as isize).is_some() => {}
                     Ok(_) | Err(_) => return None,
-                };
+                }
 
                 // NOTE: this slice must go out of scope before `guard` above is
                 // dropped. This invariant holds since the guard is constructed

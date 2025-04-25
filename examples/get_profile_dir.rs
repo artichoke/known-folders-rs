@@ -60,7 +60,7 @@ mod platform {
     impl Error for PlatformNotSupported {}
 
     pub fn try_main() -> Result<(), Box<dyn Error>> {
-        return Err(Box::new(PlatformNotSupported));
+        Err(Box::new(PlatformNotSupported))
     }
 }
 
