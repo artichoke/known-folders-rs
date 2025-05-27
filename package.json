@@ -1,0 +1,22 @@
+{
+  "name": "@artichokeruby/known-folders",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Rust bindings to the Known Folders API on Windows",
+  "keywords": [
+    "bindings",
+    "ffi",
+    "rust",
+    "windows"
+  ],
+  "repository": "github:artichoke/known-folders-rs",
+  "author": "Ryan Lopopolo <rjl@hyperbo.la> (https://hyperbo.la/)",
+  "homepage": "https://www.artichokeruby.org",
+  "bugs": "https://github.com/artichoke/known-folders-rs/issues",
+  "devDependencies": {
+    "prettier": "3.5.3"
+  },
+  "scripts": {
+    "fmt": "prettier --write \"**/*\""
+  }
+}
