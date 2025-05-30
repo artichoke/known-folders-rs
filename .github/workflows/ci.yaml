@@ -17,7 +17,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, windows-2019, windows-2022]
+        os:
+          - windows-latest
+          - windows-2022
+          - windows-2025
     env:
       RUSTFLAGS: -D warnings
       RUST_BACKTRACE: 1
