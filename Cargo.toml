@@ -23,7 +23,7 @@ include = [
 [dependencies]
 
 [target.'cfg(windows)'.dependencies.windows-sys]
-version = "0.60.0"
+version = "0.61.1"
 features = [
   "Win32_Foundation",
   "Win32_Globalization",
