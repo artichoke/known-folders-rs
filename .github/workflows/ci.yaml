@@ -53,7 +53,7 @@ jobs:
         run: cargo generate-lockfile
 
       - name: Update windows-sys version to ${{ matrix.windows-sys }}
-        run: cargo update -p windows-sys --precise "^$WINDOWS_SYS_VERSION"
+        run: cargo update -p windows-sys "^$WINDOWS_SYS_VERSION"
         env:
           WINDOWS_SYS_VERSION: ${{ matrix.windows-sys }}
 
@@ -103,7 +103,7 @@ jobs:
         run: cargo generate-lockfile
 
       - name: Update windows-sys version to minimum in range
-        run: cargo update -p windows-sys --precise "0.59"
+        run: cargo update -p windows-sys --precise "0.60.2"
 
       - name: Compile
         run: cargo build --verbose
