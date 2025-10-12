@@ -22,18 +22,18 @@ jobs:
           - windows-2022
           - windows-2025
         windows-sys:
-          - "0.59"
-          - "0.60"
-          - "0.61"
+          - "0.59.0"
+          - "0.60.2"
+          - "latest"
         exclude:
           - os: windows-2022
-            windows-sys: "0.59"
+            windows-sys: "0.59.0"
           - os: windows-2022
-            windows-sys: "0.60"
+            windows-sys: "0.60.2"
           - os: windows-2025
-            windows-sys: "0.59"
+            windows-sys: "0.59.0"
           - os: windows-2025
-            windows-sys: "0.60"
+            windows-sys: "0.60.2"
 
     env:
       RUSTFLAGS: -D warnings
@@ -53,7 +53,8 @@ jobs:
         run: cargo generate-lockfile
 
       - name: Update windows-sys version to ${{ matrix.windows-sys }}
-        run: cargo update "windows-sys@$env:WINDOWS_SYS_VERSION"
+        run: cargo update -p windows-sys --precise "$env:WINDOWS_SYS_VERSION"
+        if: ${{ matrix.windows-sys != 'latest' }}
         env:
           WINDOWS_SYS_VERSION: ${{ matrix.windows-sys }}
 
