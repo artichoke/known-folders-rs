@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-known-folders = "1.3.1"
+known-folders = "1.4.0"
 ```
 
 Then resolve well-known directories like this:
