@@ -51,7 +51,7 @@ Note that this crate is completely empty on non-Windows platforms.
 
 ## Minimum Supported Rust Version
 
-This crate requires at least Rust 1.71.0. This version can be bumped in minor
+This crate requires at least Rust 1.60.0. This version can be bumped in minor
 releases.
 
 ## License
