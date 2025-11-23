@@ -12,8 +12,8 @@ jobs:
     name: Labels
     runs-on: ubuntu-latest
     permissions:
-      issues: write
-      pull-requests: write
+      issues: write # required to read and write labels
+      pull-requests: write # required to read and write labels
 
     steps:
       - uses: mheap/github-action-required-labels@8afbe8ae6ab7647d0c9f0cfa7c2f939650d22509 # v5.5
