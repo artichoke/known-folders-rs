@@ -10,7 +10,8 @@ name: Documentation
   schedule:
     - cron: "0 0 * * TUE"
 concurrency:
-  group: docs-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 env:
   CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
 permissions: {}
