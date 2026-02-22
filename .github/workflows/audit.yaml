@@ -18,6 +18,8 @@ jobs:
   ruby:
     name: Audit Ruby Dependencies
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # required to checkout repository
 
     steps:
       - name: Checkout repository
@@ -42,6 +44,8 @@ jobs:
         checks:
           - advisories
           - bans licenses sources
+    permissions:
+      contents: read # required to checkout repository
 
     # Prevent sudden announcement of a new advisory from failing ci:
     continue-on-error: ${{ matrix.checks == 'advisories' }}
@@ -53,7 +57,9 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: artichoke/setup-rust/audit@68e0ebb3b406970de1cc2ca807797c9156a198a7 # v2.0.1
+        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
+        with:
+          toolchain: stable
 
       - name: Generate Cargo.lock
         run: |
@@ -79,6 +85,6 @@ jobs:
           persist-credentials: false
 
       - name: Run zizmor 🌈
-        uses: zizmorcore/zizmor-action@e639db99335bc9038abc0e066dfcd72e23d26fb4 # v0.3.0
+        uses: zizmorcore/zizmor-action@135698455da5c3b3e55f73f4419e481ab68cdd95 # v0.4.1
         with:
           persona: "pedantic"
