@@ -9,10 +9,11 @@ name: CI
       - trunk
   schedule:
     - cron: "0 0 * * WED"
-permissions: {}
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read # needed to checkout contents
 jobs:
   build:
     name: Build
@@ -48,7 +49,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: artichoke/setup-rust/build-and-test@68e0ebb3b406970de1cc2ca807797c9156a198a7 # v2.0.1
+        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
         with:
           toolchain: stable
 
@@ -99,7 +100,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: artichoke/setup-rust/build-and-test@68e0ebb3b406970de1cc2ca807797c9156a198a7 # v2.0.1
+        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
         with:
           toolchain: "1.60.0"
 
@@ -150,7 +151,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: artichoke/setup-rust/build-and-test@68e0ebb3b406970de1cc2ca807797c9156a198a7 # v2.0.1
+        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
         with:
           toolchain: stable
 
@@ -198,8 +199,9 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: artichoke/setup-rust/lint-and-format@68e0ebb3b406970de1cc2ca807797c9156a198a7 # v2.0.1
+        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
         with:
+          components: rustfmt, clippy
           toolchain: stable
 
       - name: Check formatting
@@ -236,7 +238,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js runtime
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           node-version: "lts/*"
 
