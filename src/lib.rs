@@ -24,7 +24,6 @@
 //
 // This approach is borrowed from tokio.
 #![cfg_attr(docsrs, feature(doc_cfg))]
-#![cfg_attr(docsrs, feature(doc_alias))]
 
 //! Retrieves the full path of a known folder identified by the folder's
 //! **KNOWNFOLDERID** on Windows systems using `SHGetKnownFolderPath` and the
@@ -52,7 +51,7 @@
 //!
 //! [Known Folders]: https://learn.microsoft.com/en-us/windows/win32/shell/known-folders
 
-#![doc(html_root_url = "https://docs.rs/known-folders/1.4.1")]
+#![doc(html_root_url = "https://docs.rs/known-folders/1.4.2")]
 
 // Ensure code blocks in `README.md` compile
 #[cfg(all(doctest, windows))]
