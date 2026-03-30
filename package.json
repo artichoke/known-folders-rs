@@ -17,8 +17,6 @@
     "prettier": "3.8.1"
   },
   "scripts": {
-    "fmt": "npm run format:text",
-    "format:text": "prettier --write \"**/*\"",
-    "lint:text": "prettier --check \"**/*\""
+    "fmt": "prettier --write \"**/*\""
   }
 }
