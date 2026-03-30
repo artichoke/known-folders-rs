@@ -53,6 +53,33 @@ Note that this crate is completely empty on non-Windows platforms.
 This crate requires at least Rust 1.60.0. This version can be bumped in minor
 releases.
 
+## Development
+
+This repository uses [mise](https://mise.jdx.dev/) to manage the local
+development toolchain declared in [`mise.toml`](mise.toml), including Node.js,
+Python, Ruby, Rust, `uv`, `cargo-deny`, and `zizmor`. For Rust, `mise` installs
+the stable toolchain via [rustup](https://rustup.rs/). Nightly-only tasks in
+[`Rakefile`](Rakefile) continue to use `rustup` on demand.
+
+Install the shared toolchain with:
+
+```shell
+mise install
+```
+
+Then install the repo-local npm and Ruby dependencies with:
+
+```shell
+npm install
+bundle install
+```
+
+YAML linting runs through the locked `uv` environment in [`uv.lock`](uv.lock):
+
+```shell
+uv run yamllint --strict --format github .
+```
+
 ## License
 
 `known-folders-rs` is distributed under the terms of either the
