@@ -5,19 +5,6 @@ require 'shellwords'
 require 'bundler/audit/task'
 require 'rubocop/rake_task'
 
-def prettier_bin!
-  prettier = %w[prettier prettier.cmd]
-             .map { |bin| File.expand_path(File.join('node_modules', '.bin', bin), __dir__) }
-             .find { |path| File.file?(path) }
-  return prettier if prettier
-
-  abort 'prettier is not installed. Run `npm install` before invoking this task.'
-end
-
-def run_prettier(*args)
-  sh Shellwords.join([prettier_bin!, *args])
-end
-
 task default: %i[format lint]
 
 desc 'Lint sources'
@@ -61,7 +48,7 @@ namespace :format do
 
   desc 'Format text, YAML, and Markdown sources with prettier'
   task :text do
-    run_prettier('--write', '**/*')
+    sh 'npm run format:text'
   end
 end
 
@@ -76,7 +63,7 @@ namespace :fmt do
 
   desc 'Format text, YAML, and Markdown sources with prettier'
   task :text do
-    run_prettier('--write', '**/*')
+    sh 'npm run format:text'
   end
 end
 
