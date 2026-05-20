@@ -57,9 +57,8 @@ releases.
 
 This repository uses [mise](https://mise.jdx.dev/) to manage the local
 development toolchain declared in [`mise.toml`](mise.toml), including Node.js,
-Python, Ruby, Rust, `uv`, `cargo-deny`, and `zizmor`. For Rust, `mise` installs
-the stable toolchain via [rustup](https://rustup.rs/). Nightly-only tasks in
-[`Rakefile`](Rakefile) continue to use `rustup` on demand.
+Python, Rust, `uv`, `cargo-deny`, and `zizmor`. For Rust, `mise` installs the
+stable toolchain via [rustup](https://rustup.rs/).
 
 Install the shared toolchain with:
 
@@ -67,11 +66,19 @@ Install the shared toolchain with:
 mise install
 ```
 
-Then install the repo-local npm and Ruby dependencies with:
+Then install the repo-local npm dependencies with:
 
 ```shell
 npm install
-bundle install
+```
+
+Common checks run directly through the underlying tools:
+
+```shell
+cargo fmt --check
+cargo clippy --workspace --all-features --all-targets
+cargo test --workspace
+npm run fmt:check
 ```
 
 YAML linting runs through the locked `uv` environment in [`uv.lock`](uv.lock):
@@ -79,6 +86,11 @@ YAML linting runs through the locked `uv` environment in [`uv.lock`](uv.lock):
 ```shell
 uv run yamllint --strict --format github .
 ```
+
+Maintenance of this repository is Codex-first. Prefer asking Codex to make
+routine code, documentation, CI, and dependency updates, then review the
+resulting diff and CI status before merging. See
+[`CONTRIBUTING.md`](CONTRIBUTING.md) for contribution expectations.
 
 ## License
 
