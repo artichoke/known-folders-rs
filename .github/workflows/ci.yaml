@@ -49,9 +49,9 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
-        with:
-          toolchain: stable
+        run: |
+          rustup default stable
+          rustup show
 
       - name: Generate lockfile
         run: cargo generate-lockfile
@@ -100,9 +100,10 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
-        with:
-          toolchain: "1.60.0"
+        run: |
+          rustup toolchain install 1.60.0 --profile minimal
+          rustup default 1.60.0
+          rustup show
 
       - name: Generate lockfile
         run: cargo generate-lockfile
@@ -151,9 +152,9 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
-        with:
-          toolchain: stable
+        run: |
+          rustup default stable
+          rustup show
 
       - name: Compile
         run: cargo build --verbose
@@ -199,10 +200,10 @@ jobs:
           persist-credentials: false
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@e97e2d8cc328f1b50210efc529dca0028893a2d9 # master
-        with:
-          components: rustfmt, clippy
-          toolchain: stable
+        run: |
+          rustup default stable
+          rustup component add rustfmt clippy
+          rustup show
 
       - name: Check formatting
         run: cargo fmt --check
