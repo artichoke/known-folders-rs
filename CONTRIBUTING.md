@@ -20,8 +20,8 @@ known-folders-rs includes Rust and text sources. Developing on known-folders-rs
 requires configuring several dependencies.
 
 known-folders-rs uses [mise] to manage the local development toolchain declared
-in [`mise.toml`](mise.toml), including Node.js, Python, Rust, `uv`,
-`cargo-deny`, and `zizmor`. For Rust, `mise` uses [rustup] under the hood.
+in [`mise.toml`](mise.toml), including Node.js, Rust, `cargo-deny`, and
+`zizmor`. For Rust, `mise` uses [rustup] under the hood.
 
 ### Rust Toolchain
 
@@ -69,7 +69,6 @@ cargo fmt
 cargo clippy --workspace --all-features --all-targets
 npm run fmt
 npm run fmt:check
-uv run yamllint --strict --format github .
 cargo doc --workspace
 ```
 
@@ -96,17 +95,6 @@ Then install repo-local npm dependencies:
 npm install
 ```
 
-### Python and uv
-
-Python and `uv` are optional dependencies used for linting YAML sources with
-`yamllint`.
-
-Install them with `mise`:
-
-```sh
-mise install
-```
-
 ## Linting
 
 To lint and format Rust sources run:
@@ -121,7 +109,6 @@ To lint and format text sources run:
 ```sh
 npm run fmt
 npm run fmt:check
-uv run yamllint --strict --format github .
 ```
 
 ## Testing
