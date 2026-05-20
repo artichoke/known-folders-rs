@@ -171,9 +171,6 @@ jobs:
       - name: Test with no default features
         run: cargo test --no-default-features
 
-      - name: Build documentation
-        run: cargo doc
-
       - name: Check example
         run: cargo check --examples
 
@@ -210,6 +207,21 @@ jobs:
 
       - name: Lint with Clippy
         run: cargo clippy --workspace --all-features --all-targets
+
+      - name: Install Rustdoc toolchain
+        run: |
+          rustup toolchain install nightly --profile minimal
+          rustup show
+
+      - name: Check docs with no default features
+        run: cargo +nightly doc --workspace --no-default-features
+        env:
+          RUSTDOCFLAGS: -D warnings -D rustdoc::broken_intra_doc_links --cfg docsrs
+
+      - name: Build docs
+        run: cargo +nightly doc --workspace
+        env:
+          RUSTDOCFLAGS: -D warnings -D rustdoc::broken_intra_doc_links --cfg docsrs
 
   text:
     name: Lint and format text
