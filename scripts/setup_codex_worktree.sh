@@ -34,6 +34,7 @@ trap 'error "Failure on or near line $LINENO"; exit 70' ERR
 trap 'log "completed in ${SECONDS}s"' EXIT
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.local/bin:$PATH"
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 cd_repo_root() {
   local repo_root
@@ -112,19 +113,20 @@ setup_rust() {
 
 setup_node() {
   if [[ ! -f package.json ]]; then
-    warn "skipping npm install because package.json is missing"
+    warn "skipping pnpm install because package.json is missing"
     return
   fi
 
-  need npm
+  need corepack
 
-  if [[ ! -f package-lock.json ]]; then
-    warn "skipping npm install because package-lock.json is missing"
+  if [[ ! -f pnpm-lock.yaml ]]; then
+    warn "skipping pnpm install because pnpm-lock.yaml is missing"
     return
   fi
 
   log "installing Node dependencies"
-  npm ci
+  corepack enable
+  pnpm install --frozen-lockfile
 }
 
 main() {

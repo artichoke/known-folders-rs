@@ -67,8 +67,8 @@ cargo build --workspace
 cargo test --workspace
 cargo fmt
 cargo clippy --workspace --all-features --all-targets
-npm run fmt
-npm run fmt:check
+pnpm run fmt
+pnpm run fmt:check
 cargo doc --workspace
 ```
 
@@ -89,10 +89,10 @@ Install Node.js with `mise`:
 mise install
 ```
 
-Then install repo-local npm dependencies:
+Then install repo-local pnpm dependencies:
 
 ```sh
-npm install
+pnpm install
 ```
 
 ## Linting
@@ -107,8 +107,8 @@ cargo fmt
 To lint and format text sources run:
 
 ```sh
-npm run fmt
-npm run fmt:check
+pnpm run fmt
+pnpm run fmt:check
 ```
 
 ## Testing

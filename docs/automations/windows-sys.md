@@ -104,7 +104,7 @@ cargo test --workspace
 cargo update -p windows-sys --precise <maximum-version>
 cargo test --workspace
 cargo clippy --workspace --all-features --all-targets
-npm run fmt:check
+pnpm run fmt:check
 ```
 
 If validation cannot run locally because the host is not Windows, rely on the

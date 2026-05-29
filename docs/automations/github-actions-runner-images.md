@@ -138,7 +138,7 @@ For workflow-only edits, run:
 
 ```sh
 git diff --check
-npm run fmt:check
+pnpm run fmt:check
 ```
 
 If `actionlint` is available, run it against the changed workflows. If it is not

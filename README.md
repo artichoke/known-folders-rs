@@ -65,10 +65,10 @@ Install the shared toolchain with:
 mise install
 ```
 
-Then install the repo-local npm dependencies with:
+Then install the repo-local pnpm dependencies with:
 
 ```shell
-npm install
+pnpm install
 ```
 
 Common checks run directly through the underlying tools:
@@ -77,7 +77,7 @@ Common checks run directly through the underlying tools:
 cargo fmt --check
 cargo clippy --workspace --all-features --all-targets
 cargo test --workspace
-npm run fmt:check
+pnpm run fmt:check
 ```
 
 Maintenance of this repository is Codex-first. Prefer asking Codex to make
