@@ -1,61 +1,132 @@
-# Repository Map
+# Agent Instructions
 
-This file is a map for agents working in this repository. It points to the
-source-of-truth docs, configuration, and code landmarks; it should not duplicate
-the policy held by those files.
+You are working in `artichoke/known-folders-rs`, a Rust crate that wraps the
+Windows Known Folders API and compiles as an empty crate on non-Windows targets.
 
-## Start Here
+Users rely on safe path lookup behavior, Windows UTF-16 handling, off-target
+build behavior, the supported `windows-sys` range, MSRV, and the public crate
+API. Treat those as compatibility surfaces.
 
-- `README.md`: crate purpose, supported platform behavior, and public examples.
-- `CONTRIBUTING.md`: local development setup and command expectations.
-- `Cargo.toml`: crate metadata, feature flags, MSRV, dependency ranges, and
-  docs.rs metadata.
-- `docs/guardrails/README.md`: index for Rust, OSS, unsafe, platform, testing,
-  API, FFI, and performance guardrails.
-- `docs/dependencies.md`: dependency and supply-chain posture.
-- `docs/automations/README.md`: recurring maintenance map.
-- `.github/labels.yaml`: PR label vocabulary for this repository.
+## Operating Loop
 
-## Change Map
+1. Classify the change before editing.
+2. Use the matching workflow section below to choose the guardrails and runbooks
+   to consult.
+3. Keep the diff narrow. Do not mix behavior, dependency posture, release
+   metadata, formatting, platform maintenance, and automation cleanup unless the
+   task requires it.
+4. Add or update focused tests for behavior changes, especially changes that
+   affect Windows FFI, UTF-16 conversion, pointer ownership, or target gates.
+5. Run checks that match the risk of the change; use
+   [CONTRIBUTING.md](CONTRIBUTING.md) for local command expectations. If a
+   relevant check is skipped, explain why in the PR.
+6. Update README, crate docs, guardrails, or runbooks when public behavior,
+   compatibility claims, target support, MSRV, dependency policy, or release
+   process changes.
 
-- Public API, semver, features, MSRV, target support, or publishing:
-  `docs/guardrails/api-stability-semver-and-msrv.md`,
-  `docs/guardrails/working-in-public-and-publishing-oss-crates.md`,
-  `Cargo.toml`, `README.md`, and `src/lib.rs`.
-- Rust implementation quality, lints, generated docs, or error handling:
-  `docs/guardrails/high-quality-rust-code.md`, `CONTRIBUTING.md`, `src/lib.rs`,
-  and `.github/workflows/ci.yaml`.
-- Windows FFI, UTF-16 conversion, pointer ownership, or off-target behavior:
-  `docs/guardrails/platform-specific-code.md`,
-  `docs/guardrails/ffi-bindings-and-foreign-runtime-integration.md`,
-  `docs/guardrails/unsafe-code.md`, `src/win.rs`, `src/win/ffi.rs`, and
-  `src/win/known_folder.rs`.
-- `windows-sys` version range maintenance: `docs/automations/windows-sys.md`,
-  `Cargo.toml`, and `.github/workflows/ci.yaml`.
-- Tests, examples, or target matrix coverage:
-  `docs/guardrails/testing-compatibility-and-conformance.md`,
-  `examples/get_profile_dir.rs`, and `.github/workflows/ci.yaml`.
-- Dependency, audit, or runner maintenance: `docs/dependencies.md`,
-  `docs/automations/dependency-sweep.md`,
-  `docs/automations/github-actions-runner-images.md`, `.github/dependabot.yml`,
-  `.github/workflows/audit.yaml`, and `.github/workflows/repo-labels.yaml`.
-- Markdown, YAML, JSON, or generated formatting changes: `package.json`,
-  `.prettierrc.yaml`, and `pnpm-lock.yaml`.
+## Windows API Behavior And FFI
 
-## Code Map
+Use this workflow for known-folder lookup behavior, Windows target gates, raw
+FFI calls, pointer ownership, allocation/freeing behavior, and UTF-16 path
+handling.
 
-- `src/lib.rs`: crate-level docs, target gates, feature gates, and public
-  exports.
-- `src/win.rs`: Windows implementation entry point.
-- `src/win/ffi.rs`: raw Windows API boundary.
-- `src/win/known_folder.rs`: typed known-folder identifiers and lookup surface.
-- `examples/get_profile_dir.rs`: public usage example for profile-directory
-  lookup.
+Consult:
 
-## Pull Request Map
+- [Platform-specific code](docs/guardrails/platform-specific-code.md), for
+  target-gating and platform contract expectations.
+- [FFI and foreign runtime integration](docs/guardrails/ffi-bindings-and-foreign-runtime-integration.md),
+  for binding and ABI expectations.
+- [Unsafe code](docs/guardrails/unsafe-code.md), for unsafe boundary review.
+- [Testing and conformance](docs/guardrails/testing-compatibility-and-conformance.md),
+  for target-matrix and regression coverage.
 
-- Use labels from `.github/labels.yaml`; lopopolo-owned repositories require at
-  least one `A-*` label.
-- For automation-generated work, use `C-automation` and add the `codex` label.
-  Keep `codex` as the last label definition in `.github/labels.yaml`.
-- Do not add a Codex tag to PR titles or descriptions.
+Keep the public API safe. Do not move raw Windows pointer ownership out of the
+FFI boundary without explicit justification in the PR.
+
+## `windows-sys` Maintenance
+
+Use this workflow for `windows-sys` version range updates, feature changes, or
+minimum-supported dependency checks.
+
+Consult:
+
+- [`windows-sys` automation](docs/automations/windows-sys.md), for the expected
+  maintenance flow.
+- [API stability, semver, and MSRV](docs/guardrails/api-stability-semver-and-msrv.md),
+  for dependency range and public contract impact.
+- [Testing and conformance](docs/guardrails/testing-compatibility-and-conformance.md),
+  for lower-bound and latest-version coverage.
+
+Verify both the minimum supported and latest supported `windows-sys` versions
+when the range changes.
+
+## Public API, Features, MSRV, And Releases
+
+Use this workflow for API shape, feature flags, docs.rs metadata, crate
+metadata, MSRV, semver, publishing, changelog, and release-readiness changes.
+
+Consult:
+
+- [API stability, semver, and MSRV](docs/guardrails/api-stability-semver-and-msrv.md),
+  for public contract and compatibility impact.
+- [Working in public and publishing](docs/guardrails/working-in-public-and-publishing-oss-crates.md),
+  for OSS release and communication expectations.
+
+Call out compatibility and target-support impact in the PR.
+
+## Implementation Quality
+
+Use this workflow for refactors, lint posture, error handling, documentation
+quality, crate attributes, and maintainability changes that do not intentionally
+change behavior.
+
+Consult:
+
+- [High-quality Rust code](docs/guardrails/high-quality-rust-code.md), for lint,
+  documentation, and maintainability expectations.
+- [Testing and conformance](docs/guardrails/testing-compatibility-and-conformance.md),
+  if the refactor touches behavior-sensitive paths.
+
+Prefer mechanical refactors that preserve behavior and are easy to review.
+
+## Dependencies, CI, And Automation
+
+Use this workflow for dependency ranges, audits, Dependabot, GitHub Actions,
+runner image updates, labels, and recurring maintenance.
+
+Consult:
+
+- [Dependency posture](docs/dependencies.md), for supply-chain expectations.
+- [Dependency sweep automation](docs/automations/dependency-sweep.md), for
+  dependency update procedure.
+- [GitHub Actions runner images](docs/automations/github-actions-runner-images.md),
+  for runner maintenance.
+- [Working in public and publishing](docs/guardrails/working-in-public-and-publishing-oss-crates.md),
+  if the change affects release or user-facing maintenance policy.
+
+Keep mechanical dependency and automation updates separate from behavior
+changes.
+
+## Documentation-Only Changes
+
+Use this workflow for README, crate docs, guardrails, runbooks, and PR/process
+documentation.
+
+Consult:
+
+- [High-quality Rust code](docs/guardrails/high-quality-rust-code.md), for
+  documentation quality expectations.
+- [Working in public and publishing](docs/guardrails/working-in-public-and-publishing-oss-crates.md),
+  for public-facing OSS communication.
+- The guardrail for the topic being documented when docs describe API, FFI,
+  platform, dependency, or release behavior.
+
+Docs-only PRs may skip Rust tests when the PR explains why. Still run the repo
+formatter.
+
+## Pull Requests
+
+- State the change class and compatibility impact.
+- Use labels from `.github/labels.yaml`; include at least one `A-*` label.
+- For automation-generated work, use `C-automation` and the `codex` label.
+- Do not add a Codex tag to the title or description.
