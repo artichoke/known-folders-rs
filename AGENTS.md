@@ -10,17 +10,20 @@ API. Treat those as compatibility surfaces.
 ## Operating Loop
 
 1. Classify the change before editing.
-2. Use the matching workflow section below to choose the guardrails and runbooks
+2. Read [ARCHITECTURE.md](ARCHITECTURE.md) when the change touches source
+   layout, public API boundaries, Windows FFI, target gates, dependency
+   boundaries, or compatibility surfaces.
+3. Use the matching workflow section below to choose the guardrails and runbooks
    to consult.
-3. Keep the diff narrow. Do not mix behavior, dependency posture, release
+4. Keep the diff narrow. Do not mix behavior, dependency posture, release
    metadata, formatting, platform maintenance, and automation cleanup unless the
    task requires it.
-4. Add or update focused tests for behavior changes, especially changes that
+5. Add or update focused tests for behavior changes, especially changes that
    affect Windows FFI, UTF-16 conversion, pointer ownership, or target gates.
-5. Run checks that match the risk of the change; use
+6. Run checks that match the risk of the change; use
    [CONTRIBUTING.md](CONTRIBUTING.md) for local command expectations. If a
    relevant check is skipped, explain why in the PR.
-6. Update README, crate docs, guardrails, or runbooks when public behavior,
+7. Update README, crate docs, guardrails, or runbooks when public behavior,
    compatibility claims, target support, MSRV, dependency policy, or release
    process changes.
 
@@ -32,6 +35,7 @@ handling.
 
 Consult:
 
+- [Architecture](ARCHITECTURE.md), for the module boundaries and lookup flow.
 - [Platform-specific code](docs/guardrails/platform-specific-code.md), for
   target-gating and platform contract expectations.
 - [FFI and foreign runtime integration](docs/guardrails/ffi-bindings-and-foreign-runtime-integration.md),
@@ -50,6 +54,7 @@ minimum-supported dependency checks.
 
 Consult:
 
+- [Architecture](ARCHITECTURE.md), for the target-specific dependency boundary.
 - [`windows-sys` automation](docs/automations/windows-sys.md), for the expected
   maintenance flow.
 - [API stability, semver, and MSRV](docs/guardrails/api-stability-semver-and-msrv.md),
