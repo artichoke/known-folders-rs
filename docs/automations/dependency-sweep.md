@@ -49,8 +49,10 @@ action instead of Corepack.
 
 Start every run by reviewing open Dependabot pull requests. If a Dependabot pull
 request is mechanical, aligned with the dependency posture, and passing CI, it
-may be moved to auto-merge. Leave risky updates for human review with a short
-comment explaining why.
+should be merged. Prefer enabling auto-merge while checks are still running, but
+if GitHub rejects auto-merge because the pull request is already clean, merge it
+directly with the repository-supported merge method. Leave risky updates for
+human review with a short comment explaining why.
 
 For automation-owned updates:
 
@@ -73,5 +75,8 @@ Each pull request should summarize:
 
 - old and new versions or lockfile refresh scope;
 - cooldown decisions;
-- validation commands and results;
-- any Dependabot pull requests reviewed, merged, or intentionally left alone.
+- validation commands and results.
+
+Keep sweep-level notes about Dependabot pull requests in automation memory and
+the inbox result. Include Dependabot review details in an automation-owned pull
+request only when they directly affect that pull request's change.
